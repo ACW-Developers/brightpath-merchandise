@@ -1,7 +1,10 @@
 import Navigation from "@/components/Navigation";
 import Services from "@/components/Services";
 import Footer from "@/components/Footer";
+import MarketingSection from "@/components/MarketingSection";
 import { CheckCircle2, Zap, Shield, Headphones } from "lucide-react";
+import boostGraphic from "@/assets/decorations/boost-graphic.svg";
+import preferenceGraphic from "@/assets/decorations/preference-graphic.svg";
 
 const benefits = [
   {
@@ -58,6 +61,21 @@ const ServicesPage = () => {
         {/* Main Services Section */}
         <Services />
 
+        {/* Marketing Section - Boost Your Business */}
+        <MarketingSection
+          svgSrc={boostGraphic}
+          title="Boost Your Business"
+          highlightedText="Growth"
+          description="Our comprehensive digital solutions are designed to accelerate your business growth. From custom software to digital marketing, we provide end-to-end services that drive results."
+          buttonText="Get Started"
+          buttonLink="/contact"
+          features={[
+            { title: "Custom Solutions", description: "Tailored specifically to your business needs" },
+            { title: "Scalable Architecture", description: "Built to grow with your business" },
+            { title: "Expert Team", description: "Experienced professionals at your service" },
+          ]}
+        />
+
         {/* Process Section */}
         <section className="py-24 px-6 relative about-bg">
           <div className="max-w-7xl mx-auto">
@@ -96,6 +114,7 @@ const ServicesPage = () => {
             </div>
           </div>
         </section>
+
         {/* Benefits Section */}
         <section className="py-16 px-6">
           <div className="max-w-7xl mx-auto">
@@ -120,39 +139,21 @@ const ServicesPage = () => {
           </div>
         </section>
 
-        {/* CTA Section with Image */}
-        <section className="py-24 px-6 relative">
-          <div className="max-w-7xl mx-auto">
-            <div className="glass-card overflow-hidden">
-              <div className="grid lg:grid-cols-2 gap-0">
-                <div className="relative h-96 lg:h-auto">
-                  <img 
-                    src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1770&q=80"
-                    alt="Team collaboration"
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-r from-background/80 to-transparent" />
-                </div>
-                <div className="p-12 flex flex-col justify-center relative">
-                  <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-[120px] animate-pulse-glow" />
-                  <div className="relative z-10">
-                    <h2 className="text-3xl md:text-5xl font-bold font-space mb-6 animate-text-glow">
-                      Ready to Start Your <span className="gradient-text">Project?</span>
-                    </h2>
-                    <p className="text-xl text-muted-foreground mb-8">
-                      Let's discuss how we can help transform your business with innovative digital solutions.
-                    </p>
-                    <a href="/contact">
-                      <button className="glass-button px-8 py-4 text-lg font-semibold hover:scale-105 transition-all duration-300">
-                        Get Started Today
-                      </button>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Marketing Section - Your Preference */}
+        <MarketingSection
+          svgSrc={preferenceGraphic}
+          title="Your Vision,"
+          highlightedText="Our Priority"
+          description="We believe in building solutions that truly reflect your unique business identity. Our collaborative approach ensures every project is aligned with your goals and preferences."
+          buttonText="Discuss Your Project"
+          buttonLink="/contact"
+          reversed
+          features={[
+            { title: "Personalized Approach", description: "Solutions crafted around your specific needs" },
+            { title: "Transparent Process", description: "Stay informed at every stage of development" },
+            { title: "Ongoing Support", description: "We're here for you even after launch" },
+          ]}
+        />
       </main>
       <Footer />
     </div>

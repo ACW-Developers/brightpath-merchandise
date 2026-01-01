@@ -1,11 +1,13 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Mail, Phone, MapPin, Send, MessageSquare, User, Clock, Globe, MessageCircle } from "lucide-react";
+import MarketingSection from "@/components/MarketingSection";
+import { Mail, Phone, MapPin, Send, MessageSquare, Clock, Globe, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import turtleSvg from "@/assets/decorations/turtle.svg";
 
 const contactMethods = [
   {
@@ -302,6 +304,20 @@ const ContactPage = () => {
             </div>
           </div>
         </section>
+
+        {/* Marketing Section */}
+        <MarketingSection
+          svgSrc={turtleSvg}
+          title="Let's Create Something"
+          highlightedText="Amazing Together"
+          description="Ready to take your business to the next level? Our team is excited to hear about your project and help bring your vision to life."
+          buttonText="Chat on WhatsApp"
+          buttonLink="https://wa.me/15207361677"
+          features={[
+            { title: "Quick Response", description: "We reply within hours, not days" },
+            { title: "Free Consultation", description: "No obligation project discussion" },
+          ]}
+        />
 
         {/* Map Section */}
         <section className="py-16 px-6">

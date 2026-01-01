@@ -1,9 +1,8 @@
-import { MessageCircle } from "lucide-react";
 import { useState } from "react";
 
 const WhatsAppWidget = () => {
   const [isHovered, setIsHovered] = useState(false);
-  const phoneNumber = "+254700000000"; // Replace with actual WhatsApp number
+  const phoneNumber = "+15207361677";
   const message = "Hello! I'm interested in your services. Can you help me?";
 
   const handleClick = () => {
@@ -15,7 +14,7 @@ const WhatsAppWidget = () => {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed bottom-24 right-6 z-50">
       {/* Tooltip */}
       <div
         className={`absolute bottom-full right-0 mb-3 transition-all duration-300 ${
