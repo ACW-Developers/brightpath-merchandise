@@ -1,7 +1,10 @@
 import Navigation from "@/components/Navigation";
 import About from "@/components/About";
 import Footer from "@/components/Footer";
-import { Shield, Award, Users2, TrendingUp, Clock, Globe2, Sparkles, Target, Heart } from "lucide-react";
+import MarketingSection from "@/components/MarketingSection";
+import { Shield, Award, Users2, TrendingUp, Clock, Globe2, Sparkles } from "lucide-react";
+import turtleSvg from "@/assets/decorations/turtle.svg";
+import boostGraphic from "@/assets/decorations/boost-graphic.svg";
 
 const stats = [
   { icon: Users2, value: "50+", label: "Happy Clients" },
@@ -66,6 +69,21 @@ const AboutPage = () => {
 
         {/* Main About Content */}
         <About />
+
+        {/* Marketing Section - Innovation */}
+        <MarketingSection
+          svgSrc={turtleSvg}
+          title="Innovation at"
+          highlightedText="Every Step"
+          description="We combine cutting-edge technology with creative thinking to deliver solutions that not only meet your current needs but anticipate future challenges."
+          buttonText="Explore Our Services"
+          buttonLink="/services"
+          features={[
+            { title: "Forward Thinking", description: "Building solutions for tomorrow's challenges" },
+            { title: "Continuous Learning", description: "Always staying ahead of industry trends" },
+            { title: "Client Partnership", description: "Growing together with our clients" },
+          ]}
+        />
 
         {/* Stats Section */}
         <section className="py-20 px-6 bg-background">
@@ -134,6 +152,22 @@ const AboutPage = () => {
             </div>
           </div>
         </section>
+
+        {/* Marketing Section - Growth */}
+        <MarketingSection
+          svgSrc={boostGraphic}
+          title="Partner for"
+          highlightedText="Success"
+          description="Join the growing list of businesses that have transformed their digital presence with BrightPath. We're committed to your success every step of the way."
+          buttonText="Start Your Journey"
+          buttonLink="/contact"
+          reversed
+          features={[
+            { title: "Proven Track Record", description: "100+ successful projects delivered" },
+            { title: "Long-term Support", description: "We're here for you beyond launch" },
+            { title: "Measurable Results", description: "Data-driven strategies that work" },
+          ]}
+        />
 
         {/* Why Choose Us */}
         <section className="py-20 px-6 bg-background">

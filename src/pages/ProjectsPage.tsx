@@ -1,7 +1,10 @@
 import Navigation from "@/components/Navigation";
 import Projects from "@/components/Projects";
 import Footer from "@/components/Footer";
+import MarketingSection from "@/components/MarketingSection";
 import { Code2, Palette, Database, Smartphone, Globe, Zap } from "lucide-react";
+import preferenceGraphic from "@/assets/decorations/preference-graphic.svg";
+import turtleSvg from "@/assets/decorations/turtle.svg";
 
 const technologies = [
   { icon: Code2, name: "React & Vue.js", color: "text-primary" },
@@ -85,6 +88,21 @@ const ProjectsPage = () => {
         {/* Main Projects Section */}
         <Projects />
 
+        {/* Marketing Section - Your Preference */}
+        <MarketingSection
+          svgSrc={preferenceGraphic}
+          title="Crafted to Your"
+          highlightedText="Specifications"
+          description="Every project we undertake is unique. We take the time to understand your specific requirements and deliver solutions that perfectly match your vision and business goals."
+          buttonText="Start Your Project"
+          buttonLink="/contact"
+          features={[
+            { title: "Custom Development", description: "Tailored solutions for unique challenges" },
+            { title: "Agile Methodology", description: "Flexible and iterative development process" },
+            { title: "Quality Assurance", description: "Rigorous testing at every stage" },
+          ]}
+        />
+
         {/* Industries Section */}
         <section className="py-24 px-6 relative about-bg">
           <div className="max-w-7xl mx-auto">
@@ -126,27 +144,21 @@ const ProjectsPage = () => {
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="py-24 px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="glass-card p-12 relative overflow-hidden">
-              <div className="absolute top-0 left-0 w-96 h-96 bg-secondary/10 rounded-full blur-[120px] animate-pulse-glow" />
-              <div className="relative z-10">
-                <h2 className="text-3xl md:text-5xl font-bold font-space mb-6 animate-text-glow">
-                  Let's Build Something <span className="gradient-text">Amazing</span>
-                </h2>
-                <p className="text-xl text-muted-foreground mb-8">
-                  Have a project in mind? We'd love to hear about it and help bring your vision to life.
-                </p>
-                <a href="#contact">
-                  <button className="glass-button px-8 py-4 text-lg font-semibold hover:scale-105 transition-all duration-300">
-                    Start Your Project
-                  </button>
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Marketing Section - Digital Transformation */}
+        <MarketingSection
+          svgSrc={turtleSvg}
+          title="Digital Transformation"
+          highlightedText="Made Simple"
+          description="Navigate the complexities of digital transformation with our expert guidance. We help you leverage technology to streamline operations and achieve sustainable growth."
+          buttonText="Get a Free Consultation"
+          buttonLink="/contact"
+          reversed
+          features={[
+            { title: "Strategic Planning", description: "Roadmap for your digital journey" },
+            { title: "Seamless Integration", description: "Connect all your systems effortlessly" },
+            { title: "Ongoing Optimization", description: "Continuous improvement for best results" },
+          ]}
+        />
       </main>
       <Footer />
     </div>
