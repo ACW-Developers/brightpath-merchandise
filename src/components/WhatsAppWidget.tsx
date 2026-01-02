@@ -2,8 +2,8 @@ import { useState } from "react";
 
 const WhatsAppWidget = () => {
   const [isHovered, setIsHovered] = useState(false);
-  const phoneNumber = "+15207361677";
-  const message = "Hello! I'm interested in your services. Can you help me?";
+  const phoneNumber = "15207361677";
+  const message = "Hello there, I'm interested in your service.";
 
   const handleClick = () => {
     const encodedMessage = encodeURIComponent(message);

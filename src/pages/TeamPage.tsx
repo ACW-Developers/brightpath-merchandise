@@ -2,6 +2,7 @@ import Navigation from "@/components/Navigation";
 import Team from "@/components/Team";
 import Footer from "@/components/Footer";
 import { Users2, Target, Lightbulb, Rocket, Heart, Zap } from "lucide-react";
+import teamGraphic from "@/assets/decorations/team-graphic.svg";
 
 const culture = [
   {
@@ -59,13 +60,30 @@ const TeamPage = () => {
           <div className="absolute top-20 right-10 w-64 h-64 bg-primary/10 rounded-full blur-[120px] animate-pulse-glow" />
           <div className="absolute bottom-20 left-10 w-64 h-64 bg-accent/10 rounded-full blur-[120px] animate-pulse-glow" style={{ animationDelay: "1s" }} />
           
-          <div className="max-w-7xl mx-auto text-center relative z-10">
-            <h1 className="text-5xl md:text-7xl font-bold font-space mb-6 animate-fade-in-up">
-              Meet Our <span className="gradient-text animate-gradient-shift">Team</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto animate-fade-in-delayed">
-              Passionate innovators dedicated to delivering exceptional digital solutions that transform businesses.
-            </p>
+          <div className="max-w-7xl mx-auto relative z-10">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Left - SVG Graphic */}
+              <div className="hidden lg:flex justify-center">
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/10 rounded-full blur-[80px]" />
+                  <img 
+                    src={teamGraphic} 
+                    alt="Team collaboration" 
+                    className="relative z-10 w-full max-w-md h-auto drop-shadow-2xl animate-float"
+                  />
+                </div>
+              </div>
+              
+              {/* Right - Content */}
+              <div className="text-center lg:text-left">
+                <h1 className="text-5xl md:text-7xl font-bold font-space mb-6 animate-fade-in-up">
+                  Meet Our <span className="gradient-text animate-gradient-shift">Team</span>
+                </h1>
+                <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl animate-fade-in-delayed">
+                  Passionate innovators dedicated to delivering exceptional digital solutions that transform businesses.
+                </p>
+              </div>
+            </div>
           </div>
         </section>
 
