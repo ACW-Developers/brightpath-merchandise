@@ -8,15 +8,15 @@ const Footer = () => {
           {/* Company Info */}
           <div className="space-y-6">
             <div>
-            <h3 className="text-2xl font-bold font-space gradient-text mb-2">
-                BrightPath Merchandise
+              <h3 className="text-2xl font-bold font-space gradient-text mb-2">
+                BrightPath Technologies
               </h3>
               <p className="text-muted-foreground text-sm leading-relaxed">
-                Premium Printing & Branding Solutions
+                Transforming Ideas into Digital Success
               </p>
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Custom merchandise, professional printing & comprehensive branding solutions for businesses of all sizes.
+              Empowering businesses with innovative digital solutions that drive growth and success in the modern digital landscape.
             </p>
           </div>
 
@@ -25,12 +25,12 @@ const Footer = () => {
             <h4 className="text-lg font-semibold font-space mb-4 text-foreground">Services</h4>
             <ul className="space-y-2 text-sm">
               {[
-                "Custom Merchandise",
-                "T-Shirt Printing",
-                "Cap & Headwear", 
-                "Car Branding",
-                "Office Branding",
-                "Digital Solutions"
+                "Website Development",
+                "Custom Software",
+                "Mobile Apps", 
+                "Digital Marketing",
+                "Logo Design",
+                "IT Consulting"
               ].map((service) => (
                 <li key={service}>
                   <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
@@ -103,7 +103,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <p className="text-sm text-muted-foreground">
-            © 2026 BrightPath Merchandise. All rights reserved.
+            © 2024 BrightPath Technologies. All rights reserved.
           </p>
           <div className="flex space-x-6 text-sm">
             <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
