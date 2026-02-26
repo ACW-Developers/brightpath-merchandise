@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from "react";
-import { Menu, X, ChevronDown, Printer, Code } from "lucide-react";
+import { Menu, X, ChevronDown, Printer, Code, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
+import { CartDrawer } from "@/components/CartDrawer";
 import logo from "@/assets/logo/logo.png";
 
 const Navigation = () => {
@@ -29,19 +30,16 @@ const Navigation = () => {
 
   const isActive = (href: string) => location.pathname === href || location.pathname.startsWith(href + '/');
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (servicesRef.current && !servicesRef.current.contains(event.target as Node)) {
         setIsServicesOpen(false);
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Scroll to top on route change
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     setIsServicesOpen(false);
@@ -83,7 +81,6 @@ const Navigation = () => {
                       <ChevronDown className={`w-4 h-4 transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} />
                     </button>
 
-                    {/* Dropdown Menu */}
                     <div
                       className={`absolute top-full left-0 mt-2 w-64 transition-all duration-300 ${
                         isServicesOpen ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-2 invisible'
@@ -146,15 +143,17 @@ const Navigation = () => {
             </div>
           </div>
 
-          {/* CTA Button (Desktop) */}
-          <div className="hidden md:block">
+          {/* Right Side - Cart + CTA */}
+          <div className="hidden md:flex items-center gap-3">
+            <CartDrawer />
             <Link to="/contact">
               <Button variant="glass">Get Started</Button>
             </Link>
           </div>
 
-          {/* Mobile Menu Toggle */}
-          <div className="md:hidden">
+          {/* Mobile - Cart + Menu Toggle */}
+          <div className="md:hidden flex items-center gap-2">
+            <CartDrawer />
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="glass-button p-2"
