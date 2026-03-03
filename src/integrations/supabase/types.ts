@@ -14,6 +14,57 @@ export type Database = {
   }
   public: {
     Tables: {
+      invoices: {
+        Row: {
+          created_at: string
+          customer_email: string
+          customer_name: string
+          customer_phone: string | null
+          due_date: string | null
+          id: string
+          invoice_number: string
+          items: Json
+          notes: string | null
+          status: string
+          subtotal: number
+          tax: number
+          total_amount: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          customer_email: string
+          customer_name: string
+          customer_phone?: string | null
+          due_date?: string | null
+          id?: string
+          invoice_number: string
+          items?: Json
+          notes?: string | null
+          status?: string
+          subtotal?: number
+          tax?: number
+          total_amount?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          customer_email?: string
+          customer_name?: string
+          customer_phone?: string | null
+          due_date?: string | null
+          id?: string
+          invoice_number?: string
+          items?: Json
+          notes?: string | null
+          status?: string
+          subtotal?: number
+          tax?: number
+          total_amount?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       orders: {
         Row: {
           created_at: string
@@ -46,6 +97,38 @@ export type Database = {
           total_amount?: number
         }
         Relationships: []
+      }
+      product_images: {
+        Row: {
+          created_at: string
+          display_order: number
+          id: string
+          image_url: string
+          product_id: string
+        }
+        Insert: {
+          created_at?: string
+          display_order?: number
+          id?: string
+          image_url: string
+          product_id: string
+        }
+        Update: {
+          created_at?: string
+          display_order?: number
+          id?: string
+          image_url?: string
+          product_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "product_images_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       products: {
         Row: {
@@ -89,6 +172,119 @@ export type Database = {
           sale_price?: number | null
           stock_quantity?: number | null
           updated_at?: string
+        }
+        Relationships: []
+      }
+      receipts: {
+        Row: {
+          created_at: string
+          customer_email: string
+          customer_name: string
+          customer_phone: string | null
+          id: string
+          items: Json
+          notes: string | null
+          order_id: string | null
+          payment_method: string
+          payment_status: string
+          receipt_number: string
+          subtotal: number
+          tax: number
+          total_amount: number
+        }
+        Insert: {
+          created_at?: string
+          customer_email: string
+          customer_name: string
+          customer_phone?: string | null
+          id?: string
+          items?: Json
+          notes?: string | null
+          order_id?: string | null
+          payment_method?: string
+          payment_status?: string
+          receipt_number: string
+          subtotal?: number
+          tax?: number
+          total_amount?: number
+        }
+        Update: {
+          created_at?: string
+          customer_email?: string
+          customer_name?: string
+          customer_phone?: string | null
+          id?: string
+          items?: Json
+          notes?: string | null
+          order_id?: string | null
+          payment_method?: string
+          payment_status?: string
+          receipt_number?: string
+          subtotal?: number
+          tax?: number
+          total_amount?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "receipts_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      store_settings: {
+        Row: {
+          accent_color: string | null
+          business_address: string | null
+          business_email: string | null
+          business_name: string
+          business_phone: string | null
+          created_at: string
+          currency: string
+          id: string
+          logo_url: string | null
+          paypal_email: string | null
+          tax_rate: number
+          theme: string
+          updated_at: string
+          venmo_handle: string | null
+          whatsapp_number: string | null
+        }
+        Insert: {
+          accent_color?: string | null
+          business_address?: string | null
+          business_email?: string | null
+          business_name?: string
+          business_phone?: string | null
+          created_at?: string
+          currency?: string
+          id?: string
+          logo_url?: string | null
+          paypal_email?: string | null
+          tax_rate?: number
+          theme?: string
+          updated_at?: string
+          venmo_handle?: string | null
+          whatsapp_number?: string | null
+        }
+        Update: {
+          accent_color?: string | null
+          business_address?: string | null
+          business_email?: string | null
+          business_name?: string
+          business_phone?: string | null
+          created_at?: string
+          currency?: string
+          id?: string
+          logo_url?: string | null
+          paypal_email?: string | null
+          tax_rate?: number
+          theme?: string
+          updated_at?: string
+          venmo_handle?: string | null
+          whatsapp_number?: string | null
         }
         Relationships: []
       }
