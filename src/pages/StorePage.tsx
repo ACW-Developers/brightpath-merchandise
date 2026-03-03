@@ -2,12 +2,12 @@ import { useState } from "react";
 import StoreNavigation from "@/components/store/StoreNavigation";
 import StoreFooter from "@/components/store/StoreFooter";
 import ProductCard from "@/components/store/ProductCard";
+import HeroCarousel from "@/components/store/HeroCarousel";
 import WhatsAppWidget from "@/components/WhatsAppWidget";
 import { useProducts, useFeaturedProducts, useSaleProducts, useCategories } from "@/hooks/useProducts";
-import { Sparkles, TrendingUp, Flame, ShoppingBag, Search } from "lucide-react";
+import { Sparkles, Flame, ShoppingBag, Search, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import decorativeBlob from "@/assets/decorative-blob.svg";
 
 const StorePage = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -26,27 +26,8 @@ const StorePage = () => {
     <div className="min-h-screen bg-background">
       <StoreNavigation />
       <main className="pt-16">
-        {/* Hero Section */}
-        <section className="py-24 px-6 relative overflow-hidden hero-bg">
-          <div className="absolute -right-32 -top-32 w-[600px] h-[600px] opacity-20 pointer-events-none">
-            <img src={decorativeBlob} alt="" className="w-full h-full animate-float-slow" />
-          </div>
-          <div className="absolute top-20 right-10 w-64 h-64 bg-accent/10 rounded-full blur-[120px] animate-pulse-glow" />
-          <div className="absolute bottom-20 left-10 w-64 h-64 bg-primary/10 rounded-full blur-[120px] animate-pulse-glow" style={{ animationDelay: "1s" }} />
-
-          <div className="max-w-7xl mx-auto text-center relative z-10">
-            <div className="inline-flex items-center gap-2 glass-card px-4 py-2 mb-6">
-              <ShoppingBag className="w-5 h-5 text-primary" />
-              <span className="text-sm font-medium text-muted-foreground">Premium Merchandise</span>
-            </div>
-            <h1 className="text-5xl md:text-7xl font-bold font-space mb-6 animate-fade-in-up">
-              BrightPath <span className="gradient-text animate-gradient-shift">Merchandise</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto animate-fade-in-delayed">
-              Custom printed merchandise, branding materials, and promotional products — all in one place.
-            </p>
-          </div>
-        </section>
+        {/* Hero Carousel */}
+        <HeroCarousel />
 
         {/* Featured Products */}
         {featured.length > 0 && (
@@ -113,25 +94,14 @@ const StorePage = () => {
               <h2 className="text-3xl font-bold font-space">All Products</h2>
             </div>
 
-            {/* Search & Filter */}
             <div className="flex flex-col md:flex-row gap-4 mb-8">
               <div className="relative flex-1 max-w-md">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                <Input
-                  placeholder="Search products..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10"
-                />
+                <Input placeholder="Search products..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-10" />
               </div>
               <div className="flex gap-2 flex-wrap">
                 {categories.map((cat) => (
-                  <Button
-                    key={cat}
-                    variant={selectedCategory === cat ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setSelectedCategory(cat)}
-                  >
+                  <Button key={cat} variant={selectedCategory === cat ? "default" : "outline"} size="sm" onClick={() => setSelectedCategory(cat)}>
                     {cat}
                   </Button>
                 ))}
@@ -140,15 +110,12 @@ const StorePage = () => {
 
             {isLoading ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {Array.from({ length: 8 }).map((_, i) => (
-                  <div key={i} className="glass-card h-80 animate-pulse" />
-                ))}
+                {Array.from({ length: 8 }).map((_, i) => <div key={i} className="glass-card h-80 animate-pulse" />)}
               </div>
             ) : filteredProducts.length === 0 ? (
               <div className="text-center py-20">
                 <ShoppingBag className="w-16 h-16 text-muted-foreground/30 mx-auto mb-4" />
                 <p className="text-xl text-muted-foreground">No products found</p>
-                <p className="text-sm text-muted-foreground mt-1">Check back soon for new arrivals!</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
