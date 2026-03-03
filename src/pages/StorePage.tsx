@@ -3,14 +3,11 @@ import StoreNavigation from "@/components/store/StoreNavigation";
 import StoreFooter from "@/components/store/StoreFooter";
 import ProductCard from "@/components/store/ProductCard";
 import HeroCarousel from "@/components/store/HeroCarousel";
-import TrustBadges from "@/components/store/TrustBadges";
-import NewsletterSection from "@/components/store/NewsletterSection";
 import WhatsAppWidget from "@/components/WhatsAppWidget";
 import { useProducts, useFeaturedProducts, useSaleProducts, useCategories } from "@/hooks/useProducts";
 import { Sparkles, Flame, ShoppingBag, Search, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import elevateBg from "@/assets/elevate-brand-bg.jpg";
 
 const StorePage = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -29,8 +26,8 @@ const StorePage = () => {
     <div className="min-h-screen bg-background">
       <StoreNavigation />
       <main className="pt-16">
+        {/* Hero Carousel */}
         <HeroCarousel />
-        <TrustBadges />
 
         {/* Featured Products */}
         {featured.length > 0 && (
@@ -64,37 +61,25 @@ const StorePage = () => {
           </section>
         )}
 
-        {/* Promotional Banner with Background */}
-        <section className="py-20 px-6 relative overflow-hidden">
-          <div className="absolute inset-0">
-            <img src={elevateBg} alt="" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-accent/10 to-secondary/20" />
-          </div>
-          <div className="max-w-7xl mx-auto relative z-10">
-            <div className="glass-card p-12 md:p-16 text-center border border-primary/20">
-              <TrendingUp className="w-14 h-14 text-primary mx-auto mb-6 animate-pulse-glow" />
-              <h2 className="text-3xl md:text-5xl font-bold font-space mb-4">
-                Elevate Your <span className="gradient-text">Brand</span>
-              </h2>
-              <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-8">
-                From custom t-shirts and caps to car branding and office signage — we bring your brand to life with premium quality prints.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        {/* Promotional Banner */}
+        <section className="py-16 px-6">
+          <div className="max-w-7xl mx-auto">
+            <div className="glass-card p-12 text-center relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-accent/10 to-secondary/10" />
+              <div className="relative z-10">
+                <TrendingUp className="w-12 h-12 text-primary mx-auto mb-4" />
+                <h2 className="text-3xl md:text-4xl font-bold font-space mb-4">
+                  Elevate Your <span className="gradient-text">Brand</span>
+                </h2>
+                <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-6">
+                  From custom t-shirts and caps to car branding and office signage — we bring your brand to life with premium quality prints.
+                </p>
                 <Button
+                  variant="glass"
                   size="lg"
-                  className="gap-2 text-base px-8"
-                  onClick={() => window.open("https://wa.me/15207361677?text=" + encodeURIComponent("Hello there, I'm interested in your custom branding service."), "_blank")}
+                  onClick={() => window.open("https://wa.me/15207361677?text=" + encodeURIComponent("Hello there, I'm interested in your service."), "_blank")}
                 >
                   Get a Custom Quote
-                </Button>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="gap-2 text-base px-8"
-                  onClick={() => document.getElementById("products")?.scrollIntoView({ behavior: "smooth" })}
-                >
-                  Browse Products
                 </Button>
               </div>
             </div>
@@ -139,8 +124,6 @@ const StorePage = () => {
             )}
           </div>
         </section>
-
-        <NewsletterSection />
       </main>
       <StoreFooter />
       <WhatsAppWidget />

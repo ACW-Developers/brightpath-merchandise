@@ -4,12 +4,11 @@ import { supabase } from "@/integrations/supabase/client";
 import StoreNavigation from "@/components/store/StoreNavigation";
 import StoreFooter from "@/components/store/StoreFooter";
 import ProductCard from "@/components/store/ProductCard";
-import ProductReviews from "@/components/store/ProductReviews";
 import WhatsAppWidget from "@/components/WhatsAppWidget";
 import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
-import { ShoppingCart, Minus, Plus, ArrowLeft, Loader2, Sparkles, ChevronLeft, ChevronRight, Star } from "lucide-react";
+import { ShoppingCart, Minus, Plus, ArrowLeft, Loader2, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
 import type { Product } from "@/types/product";
 
 const ProductDetailPage = () => {
@@ -20,8 +19,6 @@ const ProductDetailPage = () => {
   const [related, setRelated] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
-  const [avgRating, setAvgRating] = useState(0);
-  const [reviewCount, setReviewCount] = useState(0);
   const addItem = useCartStore(s => s.addItem);
 
   useEffect(() => {
@@ -33,22 +30,14 @@ const ProductDetailPage = () => {
         const p = data as Product;
         setProduct(p);
 
+        // Fetch additional images
         const { data: imgs } = await supabase.from("product_images").select("image_url").eq("product_id", id).order("display_order");
         const allImages = [p.image_url, ...(imgs || []).map((i: any) => i.image_url)].filter(Boolean) as string[];
         setImages(allImages.length > 0 ? allImages : []);
 
+        // Fetch related products
         const { data: rel } = await supabase.from("products").select("*").eq("category", p.category).neq("id", id).limit(4);
         setRelated((rel as Product[]) || []);
-
-        // Fetch review stats
-        const { data: reviews } = await supabase.from("product_reviews").select("rating").eq("product_id", id);
-        if (reviews && reviews.length > 0) {
-          setAvgRating(reviews.reduce((s, r) => s + r.rating, 0) / reviews.length);
-          setReviewCount(reviews.length);
-        } else {
-          setAvgRating(0);
-          setReviewCount(0);
-        }
       }
       setLoading(false);
     };
@@ -93,6 +82,7 @@ const ProductDetailPage = () => {
       <StoreNavigation />
       <main className="pt-20 pb-16 px-4 md:px-6">
         <div className="max-w-7xl mx-auto">
+          {/* Breadcrumb */}
           <Link to="/shop" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary mb-6 transition-colors">
             <ArrowLeft className="w-4 h-4" /> Back to Shop
           </Link>
@@ -111,12 +101,12 @@ const ProductDetailPage = () => {
                 {images.length > 1 && (
                   <>
                     <button onClick={() => setCurrentImage(i => (i - 1 + images.length) % images.length)}
-                      className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-background/50 backdrop-blur-sm flex items-center justify-center hover:bg-background/70 transition-colors border border-border">
-                      <ChevronLeft className="w-5 h-5" />
+                      className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center hover:bg-black/70 transition-colors">
+                      <ChevronLeft className="w-5 h-5 text-white" />
                     </button>
                     <button onClick={() => setCurrentImage(i => (i + 1) % images.length)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-background/50 backdrop-blur-sm flex items-center justify-center hover:bg-background/70 transition-colors border border-border">
-                      <ChevronRight className="w-5 h-5" />
+                      className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center hover:bg-black/70 transition-colors">
+                      <ChevronRight className="w-5 h-5 text-white" />
                     </button>
                   </>
                 )}
@@ -124,6 +114,7 @@ const ProductDetailPage = () => {
                   <div className="absolute top-4 left-4 bg-destructive text-destructive-foreground text-xs font-bold px-3 py-1 rounded-full">SALE</div>
                 )}
               </div>
+              {/* Thumbnails */}
               {images.length > 1 && (
                 <div className="flex gap-2 overflow-x-auto pb-2">
                   {images.map((img, i) => (
@@ -139,19 +130,7 @@ const ProductDetailPage = () => {
             {/* Product info */}
             <div className="flex flex-col">
               <p className="text-sm text-primary font-medium uppercase tracking-wider mb-2">{product.category}</p>
-              <h1 className="text-3xl md:text-4xl font-bold font-space mb-3">{product.name}</h1>
-
-              {/* Rating summary */}
-              {reviewCount > 0 && (
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="flex gap-0.5">
-                    {[1, 2, 3, 4, 5].map(i => (
-                      <Star key={i} className={`w-4 h-4 ${i <= Math.round(avgRating) ? "fill-yellow-400 text-yellow-400" : "text-muted-foreground/30"}`} />
-                    ))}
-                  </div>
-                  <span className="text-sm text-muted-foreground">{avgRating.toFixed(1)} ({reviewCount} review{reviewCount !== 1 ? "s" : ""})</span>
-                </div>
-              )}
+              <h1 className="text-3xl md:text-4xl font-bold font-space mb-4">{product.name}</h1>
 
               <div className="flex items-baseline gap-3 mb-6">
                 <span className="text-3xl font-bold text-primary font-space">${effectivePrice.toFixed(2)}</span>
@@ -168,6 +147,7 @@ const ProductDetailPage = () => {
                 <span>Stock: {product.stock_quantity > 0 ? <span className="text-green-400">{product.stock_quantity} available</span> : <span className="text-destructive">Out of stock</span>}</span>
               </div>
 
+              {/* Quantity selector */}
               <div className="flex items-center gap-4 mb-6">
                 <span className="text-sm font-medium">Quantity:</span>
                 <div className="flex items-center gap-2">
@@ -188,12 +168,9 @@ const ProductDetailPage = () => {
             </div>
           </div>
 
-          {/* Reviews Section */}
-          <ProductReviews productId={product.id} />
-
           {/* Related Products */}
           {related.length > 0 && (
-            <section className="mt-16">
+            <section>
               <h2 className="text-2xl font-bold font-space mb-6">You May Also Like</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {related.map(p => <ProductCard key={p.id} product={p} />)}

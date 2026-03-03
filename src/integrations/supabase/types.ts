@@ -130,57 +130,6 @@ export type Database = {
           },
         ]
       }
-      product_reviews: {
-        Row: {
-          comment: string | null
-          created_at: string
-          customer_email: string
-          customer_name: string
-          id: string
-          is_verified_purchase: boolean
-          order_id: string | null
-          product_id: string
-          rating: number
-        }
-        Insert: {
-          comment?: string | null
-          created_at?: string
-          customer_email: string
-          customer_name: string
-          id?: string
-          is_verified_purchase?: boolean
-          order_id?: string | null
-          product_id: string
-          rating: number
-        }
-        Update: {
-          comment?: string | null
-          created_at?: string
-          customer_email?: string
-          customer_name?: string
-          id?: string
-          is_verified_purchase?: boolean
-          order_id?: string | null
-          product_id?: string
-          rating?: number
-        }
-        Relationships: [
-          {
-            foreignKeyName: "product_reviews_order_id_fkey"
-            columns: ["order_id"]
-            isOneToOne: false
-            referencedRelation: "orders"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "product_reviews_product_id_fkey"
-            columns: ["product_id"]
-            isOneToOne: false
-            referencedRelation: "products"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       products: {
         Row: {
           category: string | null
